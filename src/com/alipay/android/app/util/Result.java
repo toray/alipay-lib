@@ -79,7 +79,7 @@ public class Result {
 			sign = sign.replace("\"", "");
 
 			if (signType.equalsIgnoreCase("RSA")) {
-				retVal = Rsa.doCheck(signContent, sign, Keys.PUBLIC);
+				retVal = Rsa.doCheck(signContent, sign, AlipayHelper.publicKey);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -7,7 +7,6 @@ import android.app.Activity;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.alipay.android.app.sdk.AliPay;
 
@@ -15,11 +14,22 @@ public class AlipayHelper {
 
 	public static int RQF_PAY = 1;
 
+	static String partner = Keys.DEFAULT_PARTNER;
+	static String seller = Keys.DEFAULT_SELLER;
+	static String publicKey = Keys.PUBLIC;
+
 	static Handler defaultHandler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 			Result result = new Result((String) msg.obj);
+			result.parseResult();
 		};
 	};
+
+	public static void init(String partner, String seller, String publicKey) {
+		AlipayHelper.partner = partner;
+		AlipayHelper.seller = seller;
+		AlipayHelper.publicKey = publicKey;
+	}
 
 	public static void pay(final Activity context, String privateKey,
 			String info, final Handler mHandler) {
@@ -56,7 +66,7 @@ public class AlipayHelper {
 			String price, String callbackUrl) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("partner=\"");
-		sb.append(Keys.DEFAULT_PARTNER);
+		sb.append(partner);
 		sb.append("\"&out_trade_no=\"");
 		sb.append(order_id);
 		sb.append("\"&subject=\"");
@@ -81,7 +91,7 @@ public class AlipayHelper {
 		}
 		sb.append("\"&payment_type=\"1");
 		sb.append("\"&seller_id=\"");
-		sb.append(Keys.DEFAULT_SELLER);
+		sb.append(seller);
 
 		// 如果show_url值为空，可不传
 		// sb.append("\"&show_url=\"");

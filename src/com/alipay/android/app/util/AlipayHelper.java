@@ -62,6 +62,36 @@ public class AlipayHelper {
 		}
 	}
 
+	public static void payWithSign(final Activity context, String sign,
+			String info, final Handler mHandler) {
+		try {
+			sign = URLEncoder.encode(sign, "UTF-8");
+			info += "&sign=\"" + sign + "\"&" + getSignType();
+			Log.i("Alipay", "start pay with sign. info = " + info);
+
+			final String orderInfo = info;
+			new Thread() {
+				public void run() {
+					AliPay alipay = new AliPay(context, mHandler);
+
+					// 设置为沙箱模式，不设置默认为线上环境
+					// alipay.setSandBox(true);
+
+					String result = alipay.pay(orderInfo);
+
+					Log.i("Alipay", "result = " + result);
+					Message msg = new Message();
+					msg.what = RQF_PAY;
+					msg.obj = result;
+					mHandler.sendMessage(msg);
+				}
+			}.start();
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+
 	public static String getOrderInfo(String order_id, String title,
 			String price, String callbackUrl) {
 		StringBuilder sb = new StringBuilder();

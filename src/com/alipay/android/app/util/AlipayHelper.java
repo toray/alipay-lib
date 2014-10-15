@@ -35,6 +35,7 @@ public class AlipayHelper {
 			String info, final Handler mHandler) {
 		try {
 			String sign = Rsa.sign(info, privateKey);
+			Log.v("Alipay", "Sign "+sign);
 			sign = URLEncoder.encode(sign, "UTF-8");
 			info += "&sign=\"" + sign + "\"&" + getSignType();
 			Log.i("Alipay", "start pay. info = " + info);

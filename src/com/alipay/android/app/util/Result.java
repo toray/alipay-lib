@@ -17,6 +17,7 @@ public class Result {
 	String memo = null;
 	String result = null;
 	boolean isSignOk = false;
+	String state = null;
 
 	public Result(String result) {
 		this.mResult = result;
@@ -48,14 +49,14 @@ public class Result {
 		try {
 			String src = mResult.replace("{", "");
 			src = src.replace("}", "");
-			String rs = getContent(src, "resultStatus=", ";memo");
-			if (sResultStatus.containsKey(rs)) {
-				resultStatus = sResultStatus.get(rs);
+			state = getContent(src, "resultStatus=", ";memo");
+			if (sResultStatus.containsKey(state)) {
+				resultStatus = sResultStatus.get(state);
 			} else {
 				resultStatus = "其他错误";
 			}
-			resultStatus += "(" + rs + ")";
-
+			resultStatus += "(" + state + ")";
+			
 			memo = getContent(src, "memo=", ";result");
 			result = getContent(src, "result=", null);
 			isSignOk = checkSign(result);
@@ -134,5 +135,11 @@ public class Result {
 		if (memo == null)
 			return "";
 		return memo;
+	}
+	
+	public String getState(){
+		if (state == null)
+			return "";
+		return state;
 	}
 }

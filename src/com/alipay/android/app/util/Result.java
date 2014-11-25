@@ -67,7 +67,11 @@ public class Result {
 
 	private boolean checkSign(String result) {
 		boolean retVal = false;
+		
+		if(result.indexOf("&sign_type=") == -1)
+			return retVal;
 		try {
+			
 			JSONObject json = string2JSON(result, "&");
 
 			int pos = result.indexOf("&sign_type=");

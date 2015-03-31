@@ -8,7 +8,7 @@
  *  2.点击“商家服务”(https://b.alipay.com/order/myorder.htm)
  *  3.点击“查询合作者身份(pid)”、“查询安全校验码(key)”
  */
-package com.alipay.android.app.util;
+package com.alipay.android.app.sdk;
 
 //
 // 请参考 Android平台安全支付服务(msp)应用开发接口(4.2 RSA算法签名)部分，并使用压缩包中的openssl RSA密钥生成工具，生成一套RSA公私钥。

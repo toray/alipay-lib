@@ -17,9 +17,8 @@ public class AlipayHelper {
 	public static String RSA_PRIVATE = "";
 	public static String RSA_PUBLIC = "";
 
-	private static final int SDK_PAY_FLAG = 1;
-
-	private static final int SDK_CHECK_FLAG = 2;
+	public static final int SDK_PAY_FLAG = 1;
+	public static final int SDK_CHECK_FLAG = 2;
 	
 	public static void init(String partner, String seller, String publicKey) {
 		AlipayHelper.PARTNER = partner;
